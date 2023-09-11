@@ -5,9 +5,10 @@ on:
       - main
     tags: ['*']
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
 concurrency:
-  # Skip intermediate builds: always.
-  # Cancel intermediate builds: only if it is a pull request build.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 jobs:
@@ -18,13 +19,12 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - '1.9'
-          - 'nightly'
+          - '1.6'
+          - '1' # latest stable 1.x release
         os:
-          - ubuntu-latest
+          - ubuntu-20.04
         arch:
           - x64
-          - x86
     steps:
       - uses: actions/checkout@v3
       - uses: julia-actions/setup-julia@v1
