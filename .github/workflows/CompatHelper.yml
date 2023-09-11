@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pkg.add("CompatHelper")
-        run: DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia -e 'using Pkg; Pkg.add("CompatHelper")'
+        run: julia -e 'using Pkg; Pkg.add("CompatHelper")'
       - name: CompatHelper.main()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMPATHELPER_PRIV: ${{ secrets.DOCUMENTER_KEY }}
-        run: DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia -e 'using CompatHelper; CompatHelper.main()'
+        run: julia -e 'using CompatHelper; CompatHelper.main()'
