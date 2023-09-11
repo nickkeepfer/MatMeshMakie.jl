@@ -1,6 +1,6 @@
 # API Reference
 
-This section provides a comprehensive list of all functions and types available in `MaterialMeshMakie`.
+This section provides a comprehensive list of all functions and types available in `MatMeshMakie`.
 
 ## Types
 

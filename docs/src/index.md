@@ -1,13 +1,13 @@
 @meta
-CurrentModule = MaterialMeshMakie
+CurrentModule = MatMeshMakie
 
-# MaterialMeshMakie
+# MatMeshMakie
 
-Documentation for [MaterialMeshMakie](https://github.com/nickkeepfer/MaterialMeshMakie.jl).
+Documentation for [MatMeshMakie](https://github.com/nickkeepfer/MatMeshMakie.jl).
 
 ## Introduction
 
-`MaterialMeshMakie.jl` is a Julia package designed for working with OBJ and MTL files, providing functionalities for parsing, manipulating, and visualizing 3D models and their associated materials.
+`MatMeshMakie.jl` is a Julia package designed for working with OBJ and MTL files, providing functionalities for parsing, manipulating, and visualizing 3D models and their associated materials.
 
 ## Features
 
@@ -18,10 +18,10 @@ Documentation for [MaterialMeshMakie](https://github.com/nickkeepfer/MaterialMes
 
 ## Installation
 
-To install `MaterialMeshMakie.jl`, run the following command in the Julia REPL:
+To install `MatMeshMakie.jl`, run the following command in the Julia REPL:
 
 ```julia
-] add MaterialMeshMakie
+] add MatMeshMakie
 ```
 
 ## Quick Start
@@ -29,7 +29,7 @@ To install `MaterialMeshMakie.jl`, run the following command in the Julia REPL:
 Here's a quick example to get you started:
 
 ```julia
-using MaterialMeshMakie
+using MatMeshMakie
 
 # Parse an OBJ file
 obj_data = readObjFile("path/to/your/file.obj")
@@ -52,9 +52,9 @@ plot_obj_mtl("path/to/your/file.obj", "path/to/your/file.mtl")
 ```
 
 ```@autodocs
-Modules = [MaterialMeshMakie]
+Modules = [MatMeshMakie]
 ```
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE.md](https://github.com/yourusername/MaterialMeshMakie.jl/blob/main/LICENSE.md) file for details.
+This project is licensed under the MIT License. See the [LICENSE.md](https://github.com/nickkeepfer/MatMeshMakie.jl/blob/main/LICENSE.md) file for details.
