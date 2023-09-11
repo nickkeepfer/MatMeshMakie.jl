@@ -51,7 +51,7 @@ jobs:
           version: '1'
       - name: Configure doc environment
         run: |
-          julia --project=docs/ -e '
+        DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --project=docs/ -e '
             using Pkg
             Pkg.develop(PackageSpec(path=pwd()))
             Pkg.instantiate()'
@@ -60,7 +60,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          julia --project=docs -e '
+      DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --project=docs -e '
             using Documenter: DocMeta, doctest
             using MatMeshMakie
             DocMeta.setdocmeta!(MatMeshMakie, :DocTestSetup, :(using MatMeshMakie); recursive=true)
