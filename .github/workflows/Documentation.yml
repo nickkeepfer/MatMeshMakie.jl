@@ -19,7 +19,8 @@ jobs:
         with:
           python-version: '3.8'
       - name: Install binary dependencies
-        run: sudo apt-get update && sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
+        run: sudo apt-get update && sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libgl1-mesa-dri libgl1-mesa-glx
+      
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
         with:
