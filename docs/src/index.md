@@ -51,10 +51,12 @@ plot_obj_mtl("path/to/your/file.obj", "path/to/your/file.mtl")
 ```@index
 ```
 
+# API
+
 ```@autodocs
 Modules = [MatMeshMakie]
 ```
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE.md](https://github.com/nickkeepfer/MatMeshMakie.jl/blob/main/LICENSE.md) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/nickkeepfer/MatMeshMakie.jl/blob/main/LICENSE) file for details.

@@ -1,13 +1,13 @@
 # Examples
 
-This page provides a few examples to help you get started with `MaterialMeshMakie`.
+This page provides a few examples to help you get started with `MatMeshMakie`.
 
 ## Basic Usage
 
 ### Plotting a Simple Mesh
 
 ```julia
-using MaterialMeshMakie
+using MatMeshMakie
 
 # Create a simple mesh
 mesh = ...
@@ -19,7 +19,7 @@ plot_obj_mtl(mesh, "example.mtl")
 ### Adding Material Properties
 
 ```julia
-using MaterialMeshMakie
+using MatMeshMakie
 
 # Load mesh and materials
 obj_mesh = FileIO.load("example.obj")
@@ -34,7 +34,7 @@ plot_obj_mtl(obj_mesh, materials)
 ### Customizing Material Properties
 
 ```julia
-using MaterialMeshMakie
+using MatMeshMakie
 
 # Load mesh and materials
 obj_mesh = FileIO.load("example.obj")
@@ -50,7 +50,7 @@ plot_obj_mtl(obj_mesh, materials)
 ### Splitting Mesh by Material
 
 ```julia
-using MaterialMeshMakie
+using MatMeshMakie
 
 # Load mesh and materials
 obj_mesh = FileIO.load("example.obj")
