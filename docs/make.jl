@@ -9,13 +9,17 @@ makedocs(;
     repo="https://github.com/nickkeepfer/MatMeshMakie.jl/blob/{commit}{path}#{line}",
     sitename="MatMeshMakie.jl",
     format=Documenter.HTML(;
-        prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://nickkeepfer.github.io/MatMeshMakie.jl",
-        edit_link="main",
-        assets=String[],
-    ),
+    prettyurls=get(ENV, "CI", "false") == "true",
+    canonical="https://nickkeepfer.github.io/MatMeshMakie.jl",
+    edit_link="main",
+    assets=String[],
+),
     pages=[
         "Home" => "index.md",
+        "Introduction" => "introduction.md",
+        "Installation" => "installation.md",
+        "Examples" => "examples.md",
+        "API" => "api_reference.md",
     ],
 )
 

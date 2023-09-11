@@ -1,0 +1,23 @@
+# Blender 3.6.0 MTL File: 'D_Rex_Rig_2.blend'
+# www.blender.org
+
+newmtl D_Rex_MAT
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Ka G:/Drives compartilhados/Telergy Studio Shared Space/Store/dinossauros/D rex/Textures/D_Rex_MAT_Base_color.png
+
+newmtl Eye_MAT
+Ns 1000.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.100000 0.100000 0.100000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Ka G:/Drives compartilhados/Telergy Studio Shared Space/Store/dinossauros/D rex/Textures/Eye_MAT_Base_color.png
