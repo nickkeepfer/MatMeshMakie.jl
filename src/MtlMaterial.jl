@@ -46,11 +46,30 @@ end
 """
     MtlMaterial()
 
-Constructor function for `MtlMaterial`. Initializes all fields to their default values.
+Constructor function for `MtlMaterial`. Initializes all fields to reasonable default values.
 
 # Returns
 
 - `MtlMaterial`: A new `MtlMaterial` object with all fields set to default values.
+
+# Default Values
+
+- `name`: "default_material"
+- `ambient`: Vec3f(0.2, 0.2, 0.2)
+- `specular`: Vec3f(1.0, 1.0, 1.0)
+- `diffuse`: Vec3f(0.8, 0.8, 0.8)
+- `transmission_filter`: Vec3f(1.0, 1.0, 1.0)
+- `illum`: 2
+- `dissolve`: 1.0
+- `specular_exponent`: 10.0
+- `ambient_texture`: ""
+- `specular_texture`: ""
+- `diffuse_texture`: ""
+- `reflection_texture`: ""
+- `bump_map`: ""
+- `transparency`: 0.0
+- `optical_density`: 1.0
+- `emissive`: Vec3f(0.0, 0.0, 0.0)
 
 # Examples
 
@@ -60,22 +79,22 @@ mtl = MtlMaterial()
 
 """
 function MtlMaterial()
-return MtlMaterial(
-"",
-Vec3f(0.0),
-Vec3f(0.0),
-Vec3f(0.0),
-Vec3f(0.0),
-0,
-0.0f0,
-0.0f0,
-"",
-"",
-"",
-"",
-"",
-0.0f0,
-0.0f0,
-Vec3f(0.0)
-)
+    return MtlMaterial(
+        "default_material",  # Name
+        Vec3f(0.2, 0.2, 0.2),  # Ambient color
+        Vec3f(1.0, 1.0, 1.0),  # Specular color
+        Vec3f(0.8, 0.8, 0.8),  # Diffuse color
+        Vec3f(1.0, 1.0, 1.0),  # Transmission filter
+        2,  # Illumination model
+        1.0f0,  # Dissolve factor (opacity)
+        10.0f0,  # Specular exponent
+        "",  # Ambient texture map
+        "",  # Specular texture map
+        "",  # Diffuse texture map
+        "",  # Reflection texture map
+        "",  # Bump map
+        0.0f0,  # Transparency
+        1.0f0,  # Optical density
+        Vec3f(0.0, 0.0, 0.0)  # Emissive color
+    )
 end

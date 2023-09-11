@@ -10,7 +10,7 @@ This page provides a few examples to help you get started with `MatMeshMakie`.
 using MatMeshMakie
 
 # Create a simple mesh
-mesh = ...
+mesh =  FileIO.load("example.obj")
 
 # Plot the mesh
 plot_obj_mtl(mesh, "example.mtl")

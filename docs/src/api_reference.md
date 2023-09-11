@@ -2,8 +2,13 @@
 
 This section provides a comprehensive list of all functions and types available in `MatMeshMakie`.
 
+## Types
 ```@docs
 MtlMaterial
+```
+
+## Functions
+```@docs
 readMtlFile
 plot_obj_mtl
 get_material_properties

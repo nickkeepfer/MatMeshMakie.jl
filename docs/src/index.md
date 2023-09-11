@@ -48,11 +48,11 @@ plot_obj_mtl("path/to/your/file.obj", "path/to/your/file.mtl")
 - [API Reference](api_reference.md)
 - [Examples](examples.md)
 
+## Index
 ```@index
 ```
 
 # API
-
 ```@autodocs
 Modules = [MatMeshMakie]
 ```
