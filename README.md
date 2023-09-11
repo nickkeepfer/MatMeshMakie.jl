@@ -6,7 +6,7 @@
 
 ## Overview
 
-`MatMeshMakie.jl` is a Julia package for rendering 3D meshes with material properties specified in OBJ and MTL files. It provides functions for loading, parsing, and visualizing 3D models with various material properties as defined in the .mtl file, like ambient color, diffuse color, and textures. The meshes are visualised with [GLMakie](https://docs.makie.org/stable/), at present some properties cannot be propagated to the plot, but perhaps in due course of Makie's development they will be
+`MatMeshMakie.jl` is a Julia package for rendering 3D meshes with material properties specified in OBJ and MTL files. It provides functions for loading, parsing, and visualizing 3D models with various material properties as defined in the .mtl file, like ambient color, diffuse color, and textures. The meshes are visualised with [GLMakie](https://docs.makie.org/stable/). 
 
 ## Installation
 
@@ -34,8 +34,7 @@ materials = readMtlFile(mtl_file)
 plot_obj_mtl(obj_file, mtl_file)
 
 ```
-![example_fig](https://github.com/nickkeepfer/MatMeshMakie.jl/assets/45045579/6d43ac67-7f19-49c7-9d43-26e21ec12920)
-
+![Example](https://github.com/nickkeepfer/MatMeshMakie.jl/assets/45045579/2db7a25c-d31a-4668-9a18-50e1666e80df)
 
 For more detailed usage, please refer to the [documentation](https://nickkeepfer.github.io/MatMeshMakie.jl/stable).
 
