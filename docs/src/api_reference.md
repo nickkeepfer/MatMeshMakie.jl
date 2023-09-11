@@ -5,7 +5,6 @@ This section provides a comprehensive list of all functions and types available 
 ```@docs
 MtlMaterial
 readMtlFile
-parseMtlColor
 plot_obj_mtl
 get_material_properties
 get_face_materials
