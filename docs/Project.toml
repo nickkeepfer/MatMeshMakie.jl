@@ -1,0 +1,3 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+MatMeshMakie = "bcbdc2fc-ad29-4e28-897c-b0576779f6f6"

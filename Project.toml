@@ -1,0 +1,13 @@
+name = "MatMeshMakie"
+uuid = "bcbdc2fc-ad29-4e28-897c-b0576779f6f6"
+authors = ["Nick Keepfer"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.9"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
