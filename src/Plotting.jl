@@ -98,7 +98,7 @@ function plot_obj_mtl(asset_obj::GeometryBasics.Mesh, materials::Vector{MtlMater
     lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
 
     # Get face materials (you would get this from your own function or data)
-    face_materials = get_face_materials_from_mesh(asset_obj)  # Replace with your actual function
+    face_materials = get_face_materials_from_mesh(asset_obj, materials)  # Replace with your actual function
 
     # Split mesh by material
     material_mesh_dict = split_mesh_by_material(asset_obj, face_materials)
