@@ -84,6 +84,30 @@ function plot_obj_mtl(asset_obj::String, asset_mtl::String="")
     display(fig)
 end
 
+"""
+    plot_obj_mtl(asset_obj::String, materials::Vector{MtlMaterial})
+
+Plots a 3D mesh from an OBJ file using custom material properties.
+
+# Arguments
+- `asset_obj::String`: The path to the OBJ file containing the 3D mesh.
+- `materials::Vector{MtlMaterial}`: A vector of `MtlMaterial` objects containing the material properties.
+
+# Usage
+This function reads the mesh from the OBJ file specified by `asset_obj` and applies the materials from the `materials` vector to the mesh faces. It then plots the mesh using these custom materials.
+
+# Example
+```julia
+materials = readMtlFile("example.mtl")
+plot_obj_mtl("example.obj", materials)
+
+Returns
+Displays the 3D mesh plot.
+
+See Also
+    MtlMaterial: For the structure of the material properties.
+    readMtlFile: For reading materials from an MTL file.
+"""
 function plot_obj_mtl(asset_obj::String, materials::Vector{MtlMaterial})
 
     # Check if OBJ file exists
