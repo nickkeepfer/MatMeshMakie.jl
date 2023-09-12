@@ -26,4 +26,5 @@ If no error messages appear, the installation was successful.
 
 ## What's Next?
 
+- [Examples](examples.md)
 - [API Reference](api_reference.md)
