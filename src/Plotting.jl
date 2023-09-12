@@ -13,38 +13,28 @@ Plots an OBJ file with its associated MTL file.
 # Output
 - A plot is displayed showing the 3D object with its associated materials.
 """
-function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::String="")
+function plot_obj_mtl(asset_obj::String, asset_mtl::String="")
 
-    # Initialize variables
-    obj_mesh = nothing
-    face_materials = nothing
-    materials = [MtlMaterial()]
-
-    if isa(asset_obj, String)
-        asset_dir = joinpath(dirname(asset_obj), "Textures")
-        # Handle OBJ file
-        if !isfile(asset_obj)
-            @error "OBJ file not found: $asset_obj"
-            return
-        end
-        obj_mesh = FileIO.load(asset_obj)
-        face_materials = get_face_materials(asset_obj)
-    else
-        asset_dir = joinpath(@__DIR__, "Textures")
-        # Handle Mesh object
-        obj_mesh = asset_obj
-        face_materials = get_face_materials(asset_obj)  # This function needs to be defined
+    # Check if OBJ file exists
+    if !isfile(asset_obj)
+        @error "OBJ file not found: $asset_obj"
+        return
     end
 
-    # Handle MTL file
-    if !isempty(asset_mtl)
+    # Initialize default material
+    default_material = MtlMaterial()
+
+    # Issue a warning if no MTL file is provided
+    if isempty(asset_mtl)
+        @warn "No MTL file provided. Using default material."
+        materials = Dict("default_material" => default_material)
+    else
+        # Check if MTL file exists
         if !isfile(asset_mtl)
             @error "MTL file not found: $asset_mtl"
             return
         end
-        materials = readMtlFile(asset_mtl)
-    else
-        @warn "No MTL file provided. Using default material."
+        materials = readMtlFile(asset_mtl) 
     end
 
     # Figure
@@ -56,6 +46,17 @@ function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::
 
     # Scene definition
     lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
+
+    asset_dir = joinpath(dirname(asset_obj),"Textures")
+
+    # Load mesh and materials
+    obj_mesh = FileIO.load(asset_obj)
+    face_materials = get_face_materials(asset_obj) 
+
+    # If no MTL file is provided, use default material for all faces
+    if isempty(asset_mtl)
+        face_materials .= "default_material"
+    end
 
     # Split mesh by material
     material_mesh_dict = split_mesh_by_material(obj_mesh, face_materials) 
