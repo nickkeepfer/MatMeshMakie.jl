@@ -15,7 +15,7 @@ Helper function to plot a mesh with its associated materials.
 # Output
 - A plot is displayed showing the 3D object with its associated materials.
 """
-function plot_mesh_with_materials(mesh::GeometryBasics.Mesh, materials::Dict, asset_mtl::String, asset_dir::String)
+function plot_mesh_with_materials(mesh::GeometryBasics.Mesh, materials::Vector{MtlMaterial}, asset_mtl::String, asset_dir::String)
     fig = Figure(resolution=(1920, 1080))
     pl = PointLight(Point3f(100, 100, 100), RGBf(0.1, 0.1, 0.1))
     al = AmbientLight(RGBf(0.3, 0.3, 0.3))
