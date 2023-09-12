@@ -13,6 +13,6 @@ include("Plotting.jl")
 
 export MtlMaterial, readMtlFile, get_face_materials, split_mesh_by_material,
        get_material_properties, get_submesh_material_properties, plot_obj_mtl,
-       plot_submeshes, plot_mesh_with_materials, get_face_materials_from_mesh
-
+       plot_submeshes, plot_mesh_with_materials, get_face_materials_from_mesh,
+       plot_obj_mtl
 end
