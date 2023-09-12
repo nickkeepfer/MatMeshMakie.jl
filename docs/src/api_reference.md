@@ -15,4 +15,5 @@ get_material_properties
 get_face_materials
 split_mesh_by_material
 get_submesh_material_properties
+plot_mesh_with_materials
 ```

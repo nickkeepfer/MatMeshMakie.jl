@@ -2,6 +2,42 @@ using GLMakie
 using GeometryBasics
 
 """
+    plot_mesh_with_materials(mesh::GeometryBasics.Mesh, materials::Dict, asset_mtl::String, asset_dir::String)
+
+Helper function to plot a mesh with its associated materials.
+
+# Arguments
+- `mesh::GeometryBasics.Mesh`: The mesh object to plot.
+- `materials::Dict`: Dictionary containing material properties.
+- `asset_mtl::String`: The path to the MTL file (optional).
+- `asset_dir::String`: The directory where textures are stored.
+
+# Output
+- A plot is displayed showing the 3D object with its associated materials.
+"""
+function plot_mesh_with_materials(mesh::GeometryBasics.Mesh, materials::Dict, asset_mtl::String, asset_dir::String)
+    fig = Figure(resolution=(1920, 1080))
+    pl = PointLight(Point3f(100, 100, 100), RGBf(0.1, 0.1, 0.1))
+    al = AmbientLight(RGBf(0.3, 0.3, 0.3))
+    lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
+
+    face_materials = get_face_materials(mesh)
+    material_mesh_dict = split_mesh_by_material(mesh, face_materials)
+
+    for (material_name, sub_mesh_faces) in material_mesh_dict
+        sub_mesh = GeometryBasics.Mesh(GeometryBasics.coordinates(mesh), sub_mesh_faces)
+        material_properties = get_material_properties(asset_mtl, material_name, materials)
+        ambient_texture = isempty(material_properties[:ambient_texture]) ? nothing : FileIO.load(joinpath(asset_dir, material_properties[:ambient_texture]))
+
+        mesh!(lscene, sub_mesh, shading=true, color=ifelse(isnothing(ambient_texture), material_properties[:color], ambient_texture),
+              ambient=material_properties[:ambient], diffuse=material_properties[:diffuse], specular=material_properties[:specular],
+              shininess=material_properties[:shininess], alpha=material_properties[:alpha])
+    end
+
+    display(fig)
+end
+
+"""
     plot_obj_mtl(asset_obj::String, asset_mtl::String="")
 
 Plots an OBJ file with its associated MTL file.
@@ -14,75 +50,37 @@ Plots an OBJ file with its associated MTL file.
 - A plot is displayed showing the 3D object with its associated materials.
 """
 function plot_obj_mtl(asset_obj::String, asset_mtl::String="")
-
-    # Check if OBJ file exists
     if !isfile(asset_obj)
         @error "OBJ file not found: $asset_obj"
         return
     end
 
-    # Initialize default material
-    default_material = MtlMaterial()
+    materials = isempty(asset_mtl) ? Dict("default_material" => MtlMaterial()) : readMtlFile(asset_mtl)
+    asset_dir = joinpath(dirname(asset_obj), "Textures")
+    mesh = FileIO.load(asset_obj)
 
-    # Issue a warning if no MTL file is provided
-    if isempty(asset_mtl)
-        @warn "No MTL file provided. Using default material."
-        materials = Dict("default_material" => default_material)
-    else
-        # Check if MTL file exists
-        if !isfile(asset_mtl)
-            @error "MTL file not found: $asset_mtl"
-            return
-        end
-        materials = readMtlFile(asset_mtl) 
-    end
-
-    # Figure
-    fig = Figure(resolution=(1920, 1080))
-
-    # Lighting
-    pl = PointLight(Point3f(100, 100, 100), RGBf(0.1, 0.1, 0.1))  # Brighter point light
-    al = AmbientLight(RGBf(0.3, 0.3, 0.3))  # Brighter ambient light
-
-    # Scene definition
-    lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
-
-    asset_dir = joinpath(dirname(asset_obj),"Textures")
-
-    # Load mesh and materials
-    obj_mesh = FileIO.load(asset_obj)
-    face_materials = get_face_materials(asset_obj) 
-
-    # If no MTL file is provided, use default material for all faces
-    if isempty(asset_mtl)
-        face_materials .= "default_material"
-    end
-
-    # Split mesh by material
-    material_mesh_dict = split_mesh_by_material(obj_mesh, face_materials) 
-
-    # When loading textures, prepend the directory path
-    for (material_name, sub_mesh_faces) in material_mesh_dict
-        sub_mesh = GeometryBasics.Mesh(GeometryBasics.coordinates(obj_mesh), sub_mesh_faces)
-        material_properties = get_material_properties(asset_mtl, material_name, materials) 
-
-        # Load textures if available
-        ambient_texture = isempty(material_properties[:ambient_texture]) ? nothing : FileIO.load(joinpath(asset_dir, material_properties[:ambient_texture]))
-
-        mesh!(lscene,
-            sub_mesh,
-            shading=true,
-            color=ifelse(isnothing(ambient_texture), material_properties[:color], ambient_texture),  # Use material color if no texture is available
-            ambient=material_properties[:ambient],
-            diffuse=material_properties[:diffuse],
-            specular=material_properties[:specular],
-            shininess=material_properties[:shininess],
-            alpha=material_properties[:alpha],
-        )
-    end
-
-    display(fig)
+    plot_mesh_with_materials(mesh, materials, asset_mtl, asset_dir)
 end
+
+"""
+    plot_obj_mtl(mesh::GeometryBasics.Mesh, asset_mtl::String="")
+
+Plots a mesh object with its associated MTL file.
+
+# Arguments
+- `mesh::GeometryBasics.Mesh`: The mesh object to plot.
+- `asset_mtl::String`: The path to the MTL file (optional).
+
+# Output
+- A plot is displayed showing the 3D object with its associated materials.
+"""
+function plot_obj_mtl(mesh::GeometryBasics.Mesh, asset_mtl::String="")
+    materials = isempty(asset_mtl) ? Dict("default_material" => MtlMaterial()) : readMtlFile(asset_mtl)
+    asset_dir = "path/to/Textures"  # Define or pass this as needed
+
+    plot_mesh_with_materials(mesh, materials, asset_mtl, asset_dir)
+end
+
 
 """
     plot_submeshes(submesh_material_dict::OrderedDict{String, Tuple{GeometryBasics.Mesh, Dict{Symbol, Any}}}, asset_dir::String; texture_dir::Union{String, Nothing}=nothing, lscene::Union{LScene, Nothing}=nothing)
