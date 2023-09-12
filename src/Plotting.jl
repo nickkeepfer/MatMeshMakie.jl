@@ -84,6 +84,72 @@ function plot_obj_mtl(asset_obj::String, asset_mtl::String="")
     display(fig)
 end
 
+function plot_obj_mtl(asset_obj::GeometryBasics.Mesh, materials::Vector{MtlMaterial})
+
+    # Check if a default material exists, if not add one
+    if isnothing(findfirst(m -> m.name == "default_material", materials))
+        push!(materials, MtlMaterial())  # Add default material
+    end
+
+    # Initialize figure and lighting
+    fig = Figure(resolution=(1920, 1080))
+    pl = PointLight(Point3f(100, 100, 100), RGBf(0.1, 0.1, 0.1))
+    al = AmbientLight(RGBf(0.3, 0.3, 0.3))
+    lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
+
+    # Get face materials (you would get this from your own function or data)
+    face_materials = get_face_materials_from_mesh(asset_obj)  # Replace with your actual function
+
+    # Split mesh by material
+    material_mesh_dict = split_mesh_by_material(asset_obj, face_materials)
+
+    # Loop through sub-meshes and apply materials
+    for (material_name, sub_mesh_faces) in material_mesh_dict
+        sub_mesh = GeometryBasics.Mesh(GeometryBasics.coordinates(asset_obj), sub_mesh_faces)
+        material_properties = get_material_properties("your_mtl_file.mtl", material_name, materials)
+
+        mesh!(lscene,
+            sub_mesh,
+            shading=true,
+            color=ifelse(isnothing(material_properties[:ambient_texture]), material_properties[:color], material_properties[:ambient_texture]),
+            ambient=material_properties[:ambient],
+            diffuse=material_properties[:diffuse],
+            specular=material_properties[:specular],
+            shininess=material_properties[:shininess],
+            alpha=material_properties[:alpha]
+        )
+    end
+
+    display(fig)
+end
+
+"""
+    get_face_materials_from_mesh(mesh::GeometryBasics.Mesh, materials::Vector{MtlMaterial})
+
+Returns a vector of material names associated with each face in the mesh.
+
+# Arguments
+- `mesh::GeometryBasics.Mesh`: The mesh object.
+- `materials::Vector{MtlMaterial}`: The vector of `MtlMaterial` objects to associate with the mesh faces.
+
+# Returns
+- `Vector{String}`: A vector containing the material names associated with each face.
+"""
+function get_face_materials_from_mesh(mesh::GeometryBasics.Mesh, materials::Vector{MtlMaterial})
+    face_materials = String[]  # To store the material associated with each face
+    num_faces = length(GeometryBasics.faces(mesh))
+
+    # This is a placeholder logic. Replace it with your actual logic for associating materials with faces.
+    for i in 1:num_faces
+        material_index = (i - 1) % length(materials) + 1
+        material_name = materials[material_index].name
+        push!(face_materials, material_name)
+    end
+
+    return face_materials
+end
+
+
 """
     plot_submeshes(submesh_material_dict::OrderedDict{String, Tuple{GeometryBasics.Mesh, Dict{Symbol, Any}}}, asset_dir::String; texture_dir::Union{String, Nothing}=nothing, lscene::Union{LScene, Nothing}=nothing)
 
