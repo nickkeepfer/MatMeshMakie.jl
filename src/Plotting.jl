@@ -55,7 +55,8 @@ function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::
     # Scene definition
     lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
 
-    asset_dir = joinpath(dirname(asset_obj),"Textures")
+    # Initialize asset_dir only if asset_obj is a String (i.e., a file path)
+    asset_dir = isa(asset_obj, String) ? joinpath(dirname(asset_obj), "Textures") : nothing
 
     # Load mesh and materials
     obj_mesh = FileIO.load(asset_obj)
