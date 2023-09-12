@@ -37,15 +37,14 @@ plot_obj_mtl("example.obj", "example.mtl")
 ```julia
 using MatMeshMakie
 
-# Load mesh and materials
-obj_mesh = FileIO.load("example.obj")
+# Load materials
 materials = readMtlFile("example.mtl")
 
 # Customize material properties
 materials[1].ambient = Vec3f(0.2, 0.2, 0.2)
 
 # Plot the mesh with customized materials
-plot_obj_mtl(obj_mesh, materials)
+plot_obj_mtl("example.obj", materials)
 ```
 
 ### Splitting Mesh by Material

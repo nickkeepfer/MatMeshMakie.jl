@@ -40,48 +40,6 @@ function get_face_materials(obj_filepath::String)
     return face_materials
 end
 
-function get_material_properties(material_name::String, materials::Vector{MtlMaterial})
-    target_material_index = findfirst(m -> m.name == material_name, materials)
-    material = isnothing(target_material_index) ? MtlMaterial() : materials[target_material_index]
-
-    if isnothing(target_material_index)
-        println("Material not found: $material_name")
-    end
-
-    return Dict(
-        :color => RGB(material.ambient...),
-        :ambient => Vec3f(material.ambient),
-        :diffuse => Vec3f(material.diffuse),
-        :specular => Vec3f(material.specular),
-        :shininess => material.specular_exponent,
-        :alpha => material.dissolve,
-        :transmission_filter => Vec3f(material.transmission_filter),
-        :illum => material.illum,
-        :ambient_texture => material.ambient_texture,
-        :diffuse_texture => material.diffuse_texture,
-        :specular_texture => material.specular_texture,
-        :reflection_texture => material.reflection_texture,
-        :bump_map => material.bump_map,
-        :transparency => material.transparency,
-        :optical_density => material.optical_density,
-        :emissive => Vec3f(material.emissive)
-    )
-end
-
-
-# For Mesh object
-function get_face_materials(mesh::GeometryBasics.Mesh)
-    face_materials = String[]  # To store the material associated with each face
-    current_material = "default"  # Default material name
-
-    for face in GeometryBasics.faces(mesh)
-        # Associate the current material with this face
-        # Since each face is a triangle, push the material once
-        push!(face_materials, current_material)
-    end
-
-    return face_materials
-end
 
 """
     split_mesh_by_material(mesh, face_materials)
