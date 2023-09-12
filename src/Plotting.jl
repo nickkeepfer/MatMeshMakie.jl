@@ -21,6 +21,7 @@ function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::
     materials = Dict("default_material" => MtlMaterial())
 
     if isa(asset_obj, String)
+        asset_dir = joinpath(dirname(asset_obj), "Textures")
         # Handle OBJ file
         if !isfile(asset_obj)
             @error "OBJ file not found: $asset_obj"
@@ -29,6 +30,7 @@ function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::
         obj_mesh = FileIO.load(asset_obj)
         face_materials = get_face_materials(asset_obj)
     else
+        asset_dir = joinpath(@__DIR__, "Textures")
         # Handle Mesh object
         obj_mesh = asset_obj
         face_materials = get_face_materials(asset_obj)  # This function needs to be defined
@@ -54,9 +56,6 @@ function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::
 
     # Scene definition
     lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
-
-    # Initialize asset_dir only if asset_obj is a String (i.e., a file path)
-    asset_dir = isa(asset_obj, String) ? joinpath(dirname(asset_obj), "Textures") : nothing
 
     # Load mesh and materials
     obj_mesh = FileIO.load(asset_obj)
