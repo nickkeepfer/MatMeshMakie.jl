@@ -3,17 +3,10 @@
 using FileIO
 
 # Plot the mesh
-plot_obj_mtl(&quot;example.obj&quot;)
+plot_obj_mtl(&quot;example.obj&quot;)</code></pre><h3 id="Adding-Material-Properties"><a class="docs-heading-anchor" href="#Adding-Material-Properties">Adding Material Properties</a><a id="Adding-Material-Properties-1"></a><a class="docs-heading-anchor-permalink" href="#Adding-Material-Properties" title="Permalink"></a></h3><pre><code class="language-julia hljs">using MatMeshMakie
 
-# Plot with corresponding material file
-plot_obj_mtl(&quot;example.obj&quot;,&quot;example.mtl&quot;)</code></pre><h3 id="Adding-Material-Properties"><a class="docs-heading-anchor" href="#Adding-Material-Properties">Adding Material Properties</a><a id="Adding-Material-Properties-1"></a><a class="docs-heading-anchor-permalink" href="#Adding-Material-Properties" title="Permalink"></a></h3><pre><code class="language-julia hljs">using MatMeshMakie
-
-# Load mesh and materials
-obj_mesh = FileIO.load(&quot;example.obj&quot;)
-materials = readMtlFile(&quot;example.mtl&quot;)
-
-# Plot the mesh with materials
-plot_obj_mtl(&quot;example.obj&quot;, &quot;example.mtl&quot;)</code></pre><h2 id="Advanced-Usage"><a class="docs-heading-anchor" href="#Advanced-Usage">Advanced Usage</a><a id="Advanced-Usage-1"></a><a class="docs-heading-anchor-permalink" href="#Advanced-Usage" title="Permalink"></a></h2><h3 id="Customizing-Material-Properties"><a class="docs-heading-anchor" href="#Customizing-Material-Properties">Customizing Material Properties</a><a id="Customizing-Material-Properties-1"></a><a class="docs-heading-anchor-permalink" href="#Customizing-Material-Properties" title="Permalink"></a></h3><pre><code class="language-julia hljs">using MatMeshMakie
+# Plot mesh with materials
+plot_obj_mtl(&quot;example.obj&quot;, &quot;example.mtl&quot;)</code></pre><h2 id="Advanced-Usage"><a class="docs-heading-anchor" href="#Advanced-Usage">Advanced Usage</a><a id="Advanced-Usage-1"></a><a class="docs-heading-anchor-permalink" href="#Advanced-Usage" title="Permalink"></a></h2><h3 id="Customizing-Material-Properties"><a class="docs-heading-anchor" href="#Customizing-Material-Properties">Customizing Material Properties</a><a id="Customizing-Material-Properties-1"></a><a class="docs-heading-anchor-permalink" href="#Customizing-Material-Properties" title="Permalink"></a></h3><pre><code class="language-julia hljs">using MatMeshMakie, GLMakie
 
 # Load materials
 materials = readMtlFile(&quot;example.mtl&quot;)
@@ -34,4 +27,4 @@ material_mesh_dict = split_mesh_by_material(obj_mesh, materials)
 # Plot each sub-mesh
 for (material_name, sub_mesh_faces) in material_mesh_dict
     plot_obj_mtl(sub_mesh_faces, material_name)
-end</code></pre><p>For more details, please refer to the <a href="../api_reference/">API Reference</a>.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../installation/">« Installation</a><a class="docs-footer-nextpage" href="../api_reference/">API »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.25 on <span class="colophon-date" title="Tuesday 12 September 2023 23:01">Tuesday 12 September 2023</span>. Using Julia version 1.9.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+end</code></pre><p>For more details, please refer to the <a href="../api_reference/">API Reference</a>.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../installation/">« Installation</a><a class="docs-footer-nextpage" href="../api_reference/">API »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.25 on <span class="colophon-date" title="Tuesday 12 September 2023 23:06">Tuesday 12 September 2023</span>. Using Julia version 1.9.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
