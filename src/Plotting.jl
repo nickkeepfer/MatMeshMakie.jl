@@ -18,7 +18,7 @@ function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::
     # Initialize variables
     obj_mesh = nothing
     face_materials = nothing
-    materials = Dict("default_material" => MtlMaterial())
+    materials = [MtlMaterial()]
 
     if isa(asset_obj, String)
         asset_dir = joinpath(dirname(asset_obj), "Textures")
