@@ -8,12 +8,13 @@ This page provides a few examples to help you get started with `MatMeshMakie`.
 
 ```julia
 using MatMeshMakie
-
-# Create a simple mesh
-mesh =  FileIO.load("example.obj")
+using FileIO
 
 # Plot the mesh
-plot_obj_mtl(mesh, "example.mtl")
+plot_obj_mtl("example.obj")
+
+# Plot with corresponding material file
+plot_obj_mtl("example.obj","example.mtl")
 ```
 
 ### Adding Material Properties
@@ -26,7 +27,7 @@ obj_mesh = FileIO.load("example.obj")
 materials = readMtlFile("example.mtl")
 
 # Plot the mesh with materials
-plot_obj_mtl(obj_mesh, materials)
+plot_obj_mtl("example.obj", "example.mtl")
 ```
 
 ## Advanced Usage
