@@ -84,6 +84,57 @@ function plot_obj_mtl(asset_obj::String, asset_mtl::String="")
     display(fig)
 end
 
+function plot_obj_mtl(asset_obj::String, materials::Vector{MtlMaterial})
+
+    # Check if OBJ file exists
+    if !isfile(asset_obj)
+        @error "OBJ file not found: $asset_obj"
+        return
+    end
+
+    # Figure
+    fig = Figure(resolution=(1920, 1080))
+
+    # Lighting
+    pl = PointLight(Point3f(100, 100, 100), RGBf(0.1, 0.1, 0.1))  # Brighter point light
+    al = AmbientLight(RGBf(0.3, 0.3, 0.3))  # Brighter ambient light
+
+    # Scene definition
+    lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
+
+    asset_dir = joinpath(dirname(asset_obj),"Textures")
+
+    # Load mesh and materials
+    obj_mesh = FileIO.load(asset_obj)
+    face_materials = get_face_materials(asset_obj)
+
+    # Split mesh by material
+    material_mesh_dict = split_mesh_by_material(obj_mesh, face_materials)
+
+    # When loading textures, prepend the directory path
+    for (material_name, sub_mesh_faces) in material_mesh_dict
+        sub_mesh = GeometryBasics.Mesh(GeometryBasics.coordinates(obj_mesh), sub_mesh_faces)
+        material_properties = get_material_properties("", material_name, materials)
+
+        # Load textures if available
+        ambient_texture = isempty(material_properties[:ambient_texture]) ? nothing : FileIO.load(joinpath(asset_dir, material_properties[:ambient_texture]))
+
+        mesh!(lscene,
+            sub_mesh,
+            shading=true,
+            color=ifelse(isnothing(ambient_texture), material_properties[:color], ambient_texture),
+            ambient=material_properties[:ambient],
+            diffuse=material_properties[:diffuse],
+            specular=material_properties[:specular],
+            shininess=material_properties[:shininess],
+            alpha=material_properties[:alpha],
+        )
+    end
+
+    display(fig)
+end
+
+
 """
     plot_submeshes(submesh_material_dict::OrderedDict{String, Tuple{GeometryBasics.Mesh, Dict{Symbol, Any}}}, asset_dir::String; texture_dir::Union{String, Nothing}=nothing, lscene::Union{LScene, Nothing}=nothing)
 

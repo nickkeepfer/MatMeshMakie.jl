@@ -12,9 +12,6 @@ using FileIO
 
 # Plot the mesh
 plot_obj_mtl("example.obj")
-
-# Plot with corresponding material file
-plot_obj_mtl("example.obj","example.mtl")
 ```
 
 ### Adding Material Properties
@@ -22,11 +19,7 @@ plot_obj_mtl("example.obj","example.mtl")
 ```julia
 using MatMeshMakie
 
-# Load mesh and materials
-obj_mesh = FileIO.load("example.obj")
-materials = readMtlFile("example.mtl")
-
-# Plot the mesh with materials
+# Plot mesh with materials
 plot_obj_mtl("example.obj", "example.mtl")
 ```
 
@@ -35,7 +28,7 @@ plot_obj_mtl("example.obj", "example.mtl")
 ### Customizing Material Properties
 
 ```julia
-using MatMeshMakie
+using MatMeshMakie, GLMakie
 
 # Load materials
 materials = readMtlFile("example.mtl")
