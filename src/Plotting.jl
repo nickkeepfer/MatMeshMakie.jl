@@ -57,15 +57,6 @@ function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::
     # Scene definition
     lscene = LScene(fig[1, 1], show_axis=true, scenekw=(lights=[pl, al],))
 
-    # Load mesh and materials
-    obj_mesh = FileIO.load(asset_obj)
-    face_materials = get_face_materials(asset_obj) 
-
-    # If no MTL file is provided, use default material for all faces
-    if isempty(asset_mtl)
-        face_materials .= "default_material"
-    end
-
     # Split mesh by material
     material_mesh_dict = split_mesh_by_material(obj_mesh, face_materials) 
 
