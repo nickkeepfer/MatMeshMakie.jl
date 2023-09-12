@@ -40,6 +40,19 @@ function get_face_materials(obj_filepath::String)
     return face_materials
 end
 
+# For Mesh object
+function get_face_materials(mesh::GeometryBasics.Mesh)
+    face_materials = String[]  # To store the material associated with each face
+    current_material = "default"  # Default material name
+
+    for face in GeometryBasics.faces(mesh)
+        # Associate the current material with this face
+        # Since each face is a triangle, push the material once
+        push!(face_materials, current_material)
+    end
+
+    return face_materials
+end
 
 """
     split_mesh_by_material(mesh, face_materials)
