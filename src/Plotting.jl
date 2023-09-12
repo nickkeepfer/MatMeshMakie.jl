@@ -83,16 +83,6 @@ function plot_obj_mtl(asset_obj::Union{String, GeometryBasics.Mesh}, asset_mtl::
     display(fig)
 end
 
-function plot_obj_mtl(asset_obj::String, asset_mtl::String="")
-    if !isfile(asset_obj)
-        @error "OBJ file not found: $asset_obj"
-        return
-    end
-    obj_mesh = FileIO.load(asset_obj)
-    face_materials = get_face_materials(asset_obj)
-    plot_obj_mtl(obj_mesh, asset_mtl, face_materials, dirname(asset_obj))
-end
-
 """
     plot_submeshes(submesh_material_dict::OrderedDict{String, Tuple{GeometryBasics.Mesh, Dict{Symbol, Any}}}, asset_dir::String; texture_dir::Union{String, Nothing}=nothing, lscene::Union{LScene, Nothing}=nothing)
 
